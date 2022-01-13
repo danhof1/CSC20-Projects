@@ -36,15 +36,21 @@ class Card{
         int getVal(){
             return this->Val;
         }
+        void printCard(){
+                cout<<"Suit: "<<Suit<<endl;
+                cout<<"Face: "<<Face<<endl;
+                cout<<"Value: "<<Val<<endl;
+                cout<<""<< endl;
+            }
     };
 class Deck
 {
     private:
-        Card deck[51];
-        Card aDeck[25];
-        Card bDeck[25];
-        int rArr1[25];
-        int rArr2[25];
+        Card deck[52];
+        Card aDeck[26];
+        Card bDeck[26];
+        int rArr1[26];
+        int rArr2[26];
         int count;
         int sNum;
         int fNum;
@@ -54,12 +60,12 @@ class Deck
         int random;
     public:
         Deck(){
-        Card deck[51];
-        Card aDeck[25];
-        Card bDeck[25];
-        int rArr1[25];
-        int rArr2[25];
-        int count=51;
+        Card deck[52];
+        Card aDeck[26];
+        Card bDeck[26];
+        int rArr1[26];
+        int rArr2[26];
+        int count=52;
         int sNum=0;
         int fNum=0;
         int aCount=0;
@@ -141,18 +147,20 @@ class Deck
         //Shuffle finished
         void shuffle()
         {
-            //Split the master deck into two smaller/Equal decks
+            //Split the master deck into two smaller/Equal decks 
+            //Keep getting error Segmentation fault (core dumped)
             for(int i=0; i<52; i++){
                 count=i%2;
                 if (count==1){
-                    aDeck[aCount]=deck[i];
-                    aCount+=1;
+                aDeck[aCount]=deck[i];
+                aCount+=1;
                 }
                 else{
-                    bDeck[bCount]=deck[i];
-                    bCount+=1;
+                bDeck[bCount]=deck[i];
+                bCount+=1;
                 }
             }
+        
             //Make an array of indexes
             for (int i=0;i<52;i++){
                 count=i%2;
@@ -202,11 +210,7 @@ class Deck
             }
         void PrintDeck(){
             for (int x=0; x<52; x++){
-                cout<<x+1<<endl;
-                cout<<"Suit: "<<deck[x].getSuit()<<endl;
-                cout<<"Face: "<<deck[x].getFace()<<endl;
-                cout<<"Value: "<<deck[x].getVal()<<endl;
-                cout<<""<< endl;
+                deck[x].printCard();
             }
         }
 };
@@ -263,7 +267,7 @@ int main(){
     Player player = Player();
     Deck myDeck =Deck();
     myDeck.initialize();
-    //myDeck.shuffle();
+    myDeck.shuffle();
     myDeck.PrintDeck();
     //myDeck.PrintDeck();
    /* //int bet= player.bet();
