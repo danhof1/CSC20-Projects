@@ -41,7 +41,7 @@ class Card{
                 cout<<"Face: "<<Face<<endl;
                 cout<<"Value: "<<Val<<endl;
                 cout<<""<< endl;
-            }
+        }
     };
 class Deck
 {
@@ -234,7 +234,7 @@ class Player{
             return x;
         }
         void addCard(Card myCard){
-            Hand[count]= myCard;
+            Hand[count] = myCard;
             count+=1;
         }
         Card getHand(){
@@ -245,11 +245,7 @@ class Player{
         }
         void printHand(){
             for (int x=0; x<count; x++){
-                cout<<x+1<<endl;
-                cout<<"Suit: "<<Hand[x].getSuit()<<endl;
-                cout<<"Face: "<<Hand[x].getFace()<<endl;
-                cout<<"Value: "<<Hand[x].getVal()<<endl;
-                cout<<""<< endl;
+              Hand[x].printCard();
             }
         }
         void printTotal(){
