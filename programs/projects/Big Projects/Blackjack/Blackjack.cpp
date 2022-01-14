@@ -1,6 +1,7 @@
 #include<iostream>
 #include <cstdlib>
 #include <ctime>
+#include <string>
 using namespace std;
 
 //Card method seems alright
@@ -248,18 +249,23 @@ class Player{
         void Bet(){
             cout<<"how much do you want to bet? "<<endl;
             cin>>x;
-            temp=wallet;
             bet=x;
         }
         void blackjack(){
-            wallet=temp+(bet*1.5);
+            wallet=wallet+(bet*1.5);
         }
         void win(){
-            wallet=temp+(bet*2);
+            wallet=wallet+(bet*2);
+        }
+        int getbet(){
+            return (bet*2);
+        }
+        int getLostBet(){
+            return bet;
         }
         void lose(){
             
-            wallet=temp-bet;
+            wallet=wallet-bet;
             if (wallet==0){
                 cout<<"Bust!"<<endl;
             }
@@ -330,7 +336,7 @@ int main(){
     myDeck.initialize();
     myDeck.shuffle();
 
-    while(player.getWallet()>0&&(B!="N")){
+    while(player.getWallet()>0&&((B!="N"))){
         player.PrintWallet();
         player.Bet();
         Dealer.resetGame();
@@ -390,55 +396,58 @@ int main(){
                 
                 //if the value of your cards is greater than 21 you loose
                 if (player.getHandVal()>21){
-                    cout<<"gate1"<<endl;
                     player.lose();
                     cout<<"lose :("<<endl;
                     cout<<"Player Value:"<<endl;
                     cout<< player.getHandVal()<<endl;
                     cout<<"Dealer Value:"<<endl;
                     cout<< Dealer.getHandVal()<<endl;
+                    cout<<"Money lost:"<<endl;
+                    cout<<player.getLostBet()<<endl;
                     player.PrintWallet();
                 }
 
                 //if the value of your cards is 21 you win
                 else if (player.getHandVal()==21){
-                    cout<<"gate2"<<endl;
                     player.win();
                     cout<<"Win!!!"<<endl;
                     cout<<"Player Value:"<<endl;
                     cout<< player.getHandVal()<<endl;
                     cout<<"Dealer Value:"<<endl;
                     cout<< Dealer.getHandVal()<<endl;
+                    cout<<"Money won:"<<endl;
+                    cout<<player.getbet()<<endl;
                     player.PrintWallet();
                 }
 
                 //if the value of your cards is less than 21, and the value of your cards is greater than the dealers you win
                 else if (player.getHandVal()<21 && player.getHandVal()>Dealer.getHandVal()){
-                    cout<<"gate3"<<endl;
                     player.win();
                     cout<<"Win!!!"<<endl;
                     cout<<"Player Value:"<<endl;
                     cout<< player.getHandVal()<<endl;
                     cout<<"Dealer Value:"<<endl;
                     cout<< Dealer.getHandVal()<<endl;
+                    cout<<"Money Won:"<<endl;
+                    cout<<player.getbet()<<endl;
                     player.PrintWallet();
                 }
 
                 //if the value of your cards is less than 21 and the value of the dealers cards are greater than 21 you win
                 else if (player.getHandVal()<21&&Dealer.getHandVal()>21){
-                    cout<<"gate4"<<endl;
                     player.win();
                     cout<<"Win!!!"<<endl;
                     cout<<"Player Value:"<<endl;
                     cout<< player.getHandVal()<<endl;
                     cout<<"Dealer Value:"<<endl;
                     cout<< Dealer.getHandVal()<<endl;
+                    cout<<"Money Won:"<<endl;
+                    cout<<player.getbet()<<endl;
                     player.PrintWallet();
                 }
 
                 //if the value of your cards are less than 21 and the value of your cards are the same as the dealers a "push" happens
                 else if (player.getHandVal()<21 && player.getHandVal()==Dealer.getHandVal()){
-                    cout<<"gate6"<<endl;
                     cout<<"Push"<<endl;
                     cout<<"Player Value:"<<endl;
                     cout<< player.getHandVal()<<endl;
@@ -456,6 +465,8 @@ int main(){
                     cout<< player.getHandVal()<<endl;
                     cout<<"Dealer Value:"<<endl;
                     cout<< Dealer.getHandVal()<<endl;
+                    cout<<"Money Lost:"<<endl;
+                    cout<<player.getLostBet()<<endl;
                     player.PrintWallet();
                 }
 
@@ -470,47 +481,50 @@ int main(){
                 cout<<""<<endl;
                 player.printHand(); 
                 if (player.getHandVal()>21){
-                    cout<<"gate8"<<endl;
                     player.lose();
                     cout<<"lose :("<<endl;
                     cout<<"Player Value:"<<endl;
                     cout<< player.getHandVal()<<endl;
                     cout<<"Dealer Value:"<<endl;
                     cout<< Dealer.getHandVal()<<endl;
+                    cout<<"Money Lost:"<<endl;
+                    cout<<player.getLostBet()<<endl;
                     player.PrintWallet();
                 }
                 else if (player.getHandVal()==21){
-                    cout<<"gate9"<<endl;
                     player.win();
                     cout<<"Win!!!"<<endl;
                     cout<<"Player Value:"<<endl;
                     cout<< player.getHandVal()<<endl;
                     cout<<"Dealer Value:"<<endl;
                     cout<< Dealer.getHandVal()<<endl;
+                    cout<<"Money Won:"<<endl;
+                    cout<<player.getbet()<<endl;
                     player.PrintWallet();
                 }
                 else if (player.getHandVal()<21&&Dealer.getHandVal()>21){
-                    cout<<"gate10"<<endl;
                     player.win();
                     cout<<"Win!!!"<<endl;
                     cout<<"Player Value:"<<endl;
                     cout<< player.getHandVal()<<endl;
                     cout<<"Dealer Value:"<<endl;
                     cout<< Dealer.getHandVal()<<endl;
+                    cout<<"Money Won:"<<endl;
+                    cout<<player.getbet()<<endl;
                     player.PrintWallet();
                 }
                 else if (player.getHandVal()<21 && player.getHandVal()>Dealer.getHandVal()){
-                    cout<<"gate12"<<endl;
                     player.win();
                     cout<<"Win!!!"<<endl;
                     cout<<"Player Value:"<<endl;
                     cout<< player.getHandVal()<<endl;
                     cout<<"Dealer Value:"<<endl;
                     cout<< Dealer.getHandVal()<<endl;
+                    cout<<"Money Won:"<<endl;
+                    cout<<player.getbet()<<endl;
                     player.PrintWallet();
                 }
                 else if (player.getHandVal()<21 && player.getHandVal()==Dealer.getHandVal()){
-                    cout<<"gate13"<<endl;
                     cout<<"Push"<<endl;
                     cout<<"Player Value:"<<endl;
                     cout<< player.getHandVal()<<endl;
@@ -519,13 +533,14 @@ int main(){
                     player.PrintWallet();
                 }
                 else{
-                    cout<<"gate14"<<endl;
                     player.lose();
                     cout<<"lose :("<<endl;
                     cout<<"Player Value:"<<endl;
                     cout<< player.getHandVal()<<endl;
                     cout<<"Dealer Value:"<<endl;
                     cout<< Dealer.getHandVal()<<endl;
+                    cout<<"Money Lost:"<<endl;
+                    cout<<player.getLostBet()<<endl;
                     player.PrintWallet();
                 }
             }
