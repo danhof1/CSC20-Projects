@@ -52,10 +52,12 @@ class Deck
         int rArr1[26];
         int rArr2[26];
         int count;
-        int sNum;
-        int fNum;
         int aCount;
         int bCount;
+        int cCount;
+        int sNum;
+        int fNum;
+      
         int temp;
         int random;
     public:
@@ -65,11 +67,13 @@ class Deck
         bDeck[26];
         rArr1[26];
         rArr2[26];
-        count=52;
+        count=0;
+        aCount=0;
+        bCount=0;
+        cCount=51;
         sNum=0;
         fNum=0;
-        aCount=0;
-        bCount =0;
+       
         temp = 0;
         random = 0;
         }
@@ -200,7 +204,6 @@ class Deck
                     aCount+=1;
                 }
                 else{
-                    cout<<rArr2[bCount]<<endl;
                     deck[i]=bDeck[rArr2[bCount]];
                     bCount+=1;
                 }
@@ -208,8 +211,8 @@ class Deck
         }
         Card getCard(){
             Card temp;
-            temp =deck[count];
-            count=count-1;
+            temp =deck[cCount];
+            cCount=cCount-1;
             return temp;
             }
         void PrintDeck(){
@@ -267,16 +270,21 @@ int main(){
     Player player = Player();
     Deck myDeck =Deck();
     myDeck.initialize();
-    myDeck.PrintDeck();
     myDeck.shuffle();
-    myDeck.PrintDeck();
-    //myDeck.PrintDeck();
-   /* //int bet= player.bet();
+    //int bet= player.bet();
     cout<< "The program has started"<<endl;
-    for(int x=0;x<=1;x++){
-        Dealer.addCard(myDeck.getCard());
-        player.addCard(myDeck.getCard());
-    }
+
+    Dealer.addCard(myDeck.getCard());
+    player.addCard(myDeck.getCard());
+    Dealer.addCard(myDeck.getCard());
+    player.addCard(myDeck.getCard());
+    
+    cout<<""<<endl;
+    cout<<"Dealer Hand:"<<endl;
+    cout<<""<<endl;
     Dealer.printHand();
-    player.printHand(); */
+    cout<<""<<endl;
+    cout<<"Player Hand:"<<endl;
+    cout<<""<<endl;
+    player.printHand(); 
 }
