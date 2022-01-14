@@ -1,5 +1,4 @@
 # CSC20-Projects
-BlackJack:
 Project 1
 Blackjack
 
