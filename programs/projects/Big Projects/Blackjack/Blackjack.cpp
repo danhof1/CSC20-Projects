@@ -462,7 +462,13 @@ int main(){
             }
             else{
                 //all of the same gates except a hit doesnt happen
-
+                cout<<"Dealer Hand:"<<endl;
+                cout<<""<<endl;
+                Dealer.printHand();
+                cout<<""<<endl;
+                cout<<"Player Hand:"<<endl;
+                cout<<""<<endl;
+                player.printHand(); 
                 if (player.getHandVal()>21){
                     cout<<"gate8"<<endl;
                     player.lose();
