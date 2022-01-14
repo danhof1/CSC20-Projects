@@ -15,8 +15,10 @@ def Dictionary(mydict):
 #Prints the value pairs of the Dictionary function
 def prnt(mydict):
     for key,value in mydict.items():
+        print("")
         print(key)
         print(value)
+        
 
 #Sorts the keys alphabetically into an array   
 def sort(mydict):
@@ -46,5 +48,6 @@ def sort(mydict):
 #Main Program
 a= Dictionary(MyDictionary)
 prnt(a)
+
 sort(a)
 

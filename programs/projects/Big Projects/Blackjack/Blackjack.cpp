@@ -11,9 +11,9 @@ class Card{
         string Face;
     public:
         Card(){
-            int Val=0;
-            string Suit="";
-            string Face="";
+            Val=0;
+            Suit="";
+            Face="";
         }
         //Making the Setters
         void setSuit(string Suit){
@@ -60,18 +60,18 @@ class Deck
         int random;
     public:
         Deck(){
-        Card deck[52];
-        Card aDeck[26];
-        Card bDeck[26];
-        int rArr1[26];
-        int rArr2[26];
-        int count=52;
-        int sNum=0;
-        int fNum=0;
-        int aCount=0;
-        int bCount =0;
-        int temp = 0;
-        int random = 0;
+        deck[52];
+        aDeck[26];
+        bDeck[26];
+        rArr1[26];
+        rArr2[26];
+        count=52;
+        sNum=0;
+        fNum=0;
+        aCount=0;
+        bCount =0;
+        temp = 0;
+        random = 0;
         }
         void initialize(){
             for(int i=0; i<52; i++){
@@ -160,7 +160,6 @@ class Deck
                 bCount+=1;
                 }
             }
-        
             //Make an array of indexes
             for (int i=0;i<52;i++){
                 count=i%2;
@@ -175,7 +174,7 @@ class Deck
             srand(time(0));
             for(int i=0; i<52; i++){
                 count=i%2;
-                int random=rand()%52;
+                int random=rand()%26;
                 if (count==1){
                     temp= rArr1[i];
                     rArr1[i]=rArr1[random];
@@ -222,9 +221,9 @@ class Player{
         int HandVal;
     public:
         Player(){
-            Card Hand[10];
-            int count=0;
-            int HandVal=0;
+            Hand[10];
+            count=0;
+            HandVal=0;
         }
         //started a bet method.
         int bet(){
