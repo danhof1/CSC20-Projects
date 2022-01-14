@@ -163,16 +163,13 @@ class Deck
             aCount=0;
             bCount=0;
             //Make an array of indexes
-            for (int i=0;i<52;i++){
-                count=i%2;
-                if (count==1){
-                    rArr1[aCount]=i;
-                    aCount+=1;
-                }
-                else{
-                    rArr2[bCount]=i;
-                    bCount+=1;
-                }
+            for (int i=0;i<26;i++){
+                rArr1[aCount]=i;
+                aCount+=1;
+            }
+            for (int i=0;i<26;i++){
+                rArr2[bCount]=i;
+                bCount+=1;
             }
             aCount=0;
             bCount=0;
@@ -204,6 +201,7 @@ class Deck
                     aCount+=1;
                 }
                 else{
+                    cout<<rArr2[bCount]<<endl;
                     deck[i]=bDeck[rArr2[bCount]];
                     bCount+=1;
                 }
