@@ -160,30 +160,38 @@ class Deck
                 bCount+=1;
                 }
             }
+            aCount=0;
+            bCount=0;
             //Make an array of indexes
             for (int i=0;i<52;i++){
                 count=i%2;
                 if (count==1){
-                    rArr1[i]=i;
+                    rArr1[aCount]=i;
+                    aCount+=1;
                 }
                 else{
-                    rArr2[i]=i;
+                    rArr2[bCount]=i;
+                    bCount+=1;
                 }
             }
+            aCount=0;
+            bCount=0;
             //Randomize the array of indexes
             srand(time(0));
             for(int i=0; i<52; i++){
                 count=i%2;
                 int random=rand()%26;
                 if (count==1){
-                    temp= rArr1[i];
-                    rArr1[i]=rArr1[random];
+                    temp= rArr1[aCount];
+                    rArr1[aCount]=rArr1[random];
                     rArr1[random]=temp;
+                    aCount+=1;
                 }
                 else{
-                    temp= rArr2[i];
-                    rArr2[i]=rArr2[random];
+                    temp= rArr2[bCount];
+                    rArr2[bCount]=rArr2[random];
                     rArr2[random]=temp;
+                    bCount+=1;
                 }
             }
             aCount=0;
@@ -262,6 +270,7 @@ int main(){
     Player player = Player();
     Deck myDeck =Deck();
     myDeck.initialize();
+    myDeck.PrintDeck();
     myDeck.shuffle();
     myDeck.PrintDeck();
     //myDeck.PrintDeck();
