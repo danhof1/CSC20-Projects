@@ -148,7 +148,6 @@ class Deck
         void shuffle()
         {
             //Split the master deck into two smaller/Equal decks 
-            //Keep getting error Segmentation fault (core dumped)
             for(int i=0; i<52; i++){
                 count=i%2;
                 if (count==1){
