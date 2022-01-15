@@ -10,36 +10,30 @@ class Sieve{
     public:
     
     Sieve(){
-        size=0;
-        list=NULL;
+        
     }
-    //1) create the list
-    Sieve(int size){
-        list= new long int(size);
-        this->size = size;
-        //Fill the list from 1 to size
-
-        for(int i=0; i<size;i++){
-            list[i] =i+1;
+    void initialize(int n,bool arr[]){
+        arr[n+1];
+        for(int x=0;x<sizeof(arr)/sizeof(arr[0]);x++){
+            arr[x]=true;
         }
     }
     //3) 
-    void runAlgorithm(){
+    void runAlgorithm(int size,bool arr[]){
          if (size <= 2){
              cout<<"error your list is too small"<<endl;
          }
-         else{
-            
-            int divisor = list[1];
-            int maxNumber = (int)floor(sqrt(size));
-            int count=0;
-            for(int i=2; i< size; i++){
-                if (list[i]%divisor==0){
-                    count+=1;
-                }
-                else if (count==0){
-                    
-                }
+         else
+         {
+            for (int p=2; p*p<=size; p++)
+            {
+                // If prime[p] is not changed, then it is a prime
+                if (arr[p] == true)
+                    {
+                        // Update all multiples of p
+                        for (int i=p*2; i<=size; i += p)
+                        arr[i] = false;
+                    }
             }
 
          }
@@ -57,9 +51,12 @@ class Sieve{
     
 
 
-
-    void printPrimes(){
-      
+    //print the prime numbers 
+    void printPrimes(bool arr[]){
+       for (int p=2; p<=sizeof(arr)/sizeof(arr[0]); p++){
+            if (arr[p])
+                cout << p << " ";
+       }
     }
 
     //Extra
@@ -73,8 +70,12 @@ class Sieve{
 }
 
 int main(){
-    Sieve sieve = Sieve(20);
-    sieve.printList();
-    sieve.runAlgorithm();
-    sieve.printList();
-}
+    Sieve sieve;
+    int listSize = 0;
+    cout<<"How long is your Sieve list?"<<endl;
+    cin>>listSize;
+    bool arr[listSize];
+    sieve.initialize(listSize,arr[listSize]);
+    sieve.runAlgorithm(listSize,arr[listSize]);
+    sieve.printPrimes(arr[listSize]);
+};
