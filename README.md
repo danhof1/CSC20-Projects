@@ -1,4 +1,4 @@
-# CSC20-Projects
+# CSC20-Projects/Labs
 Project 1
 Blackjack
 
