@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include <string>
@@ -216,6 +216,10 @@ class Deck
             cCount=cCount-1;
             return temp;
             }
+        Card peekCard(){
+            return deck[cCount];
+        }
+
         void PrintDeck(){
             for (int x=0; x<52; x++){
                 deck[x].printCard();
@@ -281,6 +285,9 @@ class Player{
         int getHandVal(){
             return HandVal;
         }
+        void ace(){
+            HandVal+=1;
+        }
         Card getHand(){
             return Hand[10];
         }
@@ -319,12 +326,17 @@ class Player{
             count=0;
             HandVal=0;
         }
+        Card peekCard(int index){
+            return Hand[index];
+        }
        
         
 
 };
 
-//have to create main method logic
+
+
+//Main method logic
 int main(){
     
     string H="";
@@ -332,11 +344,12 @@ int main(){
     Player Dealer = Player();
     Player player = Player();
     Deck myDeck =Deck();
+    int Ace=0;
     cout<< "The program has started"<<endl;
     myDeck.initialize();
     myDeck.shuffle();
-
-    while(player.getWallet()>0&&((B!="N"))){
+//While loop only activates when the wallet is not empty and if B is not equal to "N" or "n" (No)
+    while((player.getWallet()>0)&&(B!="N")&&(B!="n")){
         player.PrintWallet();
         player.Bet();
         Dealer.resetGame();
@@ -345,7 +358,25 @@ int main(){
         player.addCard(myDeck.getCard());
         Dealer.addCard(myDeck.getCard());
         player.addCard(myDeck.getCard());
-
+        
+        cout<<"Hand Preview"<<endl;
+        player.printHand();
+        //if the players first card is an ace, then they can choose to set it to one or 11
+        if(player.peekCard(0).getFace()=="Ace"){
+            cout<<"You got an ace, do you want it to be a 1 or 11?"<<endl;
+            cin>>Ace;
+            if (Ace==1){
+                player.peekCard(0).setVal(1);
+            }
+        }
+        if((player.peekCard(1).getFace()=="Ace")){
+            cout<<"You got an ace, do you want it to be a 1 or 11?"<<endl;
+            cin>>Ace;
+            if (Ace==1){
+                player.peekCard(1).setVal(1);
+            }
+        }
+        //if you get a blackjack(you start with 21 and the dealer doesnt have 21)
         if ((player.getHandVal()==21)&&(Dealer.getHandVal()!=21)){
             cout<<"Dealer Hand:"<<endl;
             cout<<""<<endl;
@@ -363,7 +394,7 @@ int main(){
             cout<<"Dealer Value:"<<endl;
             cout<< Dealer.getHandVal()<<endl;
         }
-
+        //in a normal case (you dont have a blackjack)
         else{
             cout<<""<<endl;
             cout<<"Dealer Hand:"<<endl;
@@ -384,8 +415,18 @@ int main(){
         
         
             //If you hit
-            if (H=="H"){
+            if ((H=="H")||(H=="h")){
                 player.addCard(myDeck.getCard());
+                if((player.peekCard(2).getFace()=="Ace")&&player.getHandVal()>11){
+                    player.peekCard(2).setVal(1);
+                }
+                if((player.peekCard(2).getFace()=="Ace")&&player.getHandVal()<11){
+                    cout<<"You got an ace, do you want it to be a 1 or 11?"<<endl;
+                    cin>>Ace;
+                    if (Ace==1){
+                        player.peekCard(1).setVal(1);
+                    }
+                 }
                 cout<<"Dealer Hand:"<<endl;
                 cout<<""<<endl;
                 Dealer.printHand();
@@ -406,7 +447,15 @@ int main(){
                     cout<<player.getLostBet()<<endl;
                     player.PrintWallet();
                 }
-
+                //if the value of your cards are less than 21 and the value of your cards are the same as the dealers a "push" happens
+                else if (player.getHandVal()<21 && player.getHandVal()==Dealer.getHandVal()){
+                    cout<<"Push"<<endl;
+                    cout<<"Player Value:"<<endl;
+                    cout<< player.getHandVal()<<endl;
+                    cout<<"Dealer Value:"<<endl;
+                    cout<< Dealer.getHandVal()<<endl;
+                    player.PrintWallet();
+                }
                 //if the value of your cards is 21 you win
                 else if (player.getHandVal()==21){
                     player.win();
@@ -419,7 +468,6 @@ int main(){
                     cout<<player.getbet()<<endl;
                     player.PrintWallet();
                 }
-
                 //if the value of your cards is less than 21, and the value of your cards is greater than the dealers you win
                 else if (player.getHandVal()<21 && player.getHandVal()>Dealer.getHandVal()){
                     player.win();
@@ -432,7 +480,6 @@ int main(){
                     cout<<player.getbet()<<endl;
                     player.PrintWallet();
                 }
-
                 //if the value of your cards is less than 21 and the value of the dealers cards are greater than 21 you win
                 else if (player.getHandVal()<21&&Dealer.getHandVal()>21){
                     player.win();
@@ -446,19 +493,8 @@ int main(){
                     player.PrintWallet();
                 }
 
-                //if the value of your cards are less than 21 and the value of your cards are the same as the dealers a "push" happens
-                else if (player.getHandVal()<21 && player.getHandVal()==Dealer.getHandVal()){
-                    cout<<"Push"<<endl;
-                    cout<<"Player Value:"<<endl;
-                    cout<< player.getHandVal()<<endl;
-                    cout<<"Dealer Value:"<<endl;
-                    cout<< Dealer.getHandVal()<<endl;
-                    player.PrintWallet();
-                }
-                
                 //if the dealers cards are greater than yours you loose
                 else{
-                    cout<<"gate7"<<endl;
                     player.lose();
                     cout<<"lose :("<<endl;
                     cout<<"Player Value:"<<endl;
@@ -471,8 +507,9 @@ int main(){
                 }
 
             }
+            
+             //all of the same gates except a hit doesnt happen
             else{
-                //all of the same gates except a hit doesnt happen
                 cout<<"Dealer Hand:"<<endl;
                 cout<<""<<endl;
                 Dealer.printHand();
@@ -480,6 +517,7 @@ int main(){
                 cout<<"Player Hand:"<<endl;
                 cout<<""<<endl;
                 player.printHand(); 
+                
                 if (player.getHandVal()>21){
                     player.lose();
                     cout<<"lose :("<<endl;
@@ -489,6 +527,14 @@ int main(){
                     cout<< Dealer.getHandVal()<<endl;
                     cout<<"Money Lost:"<<endl;
                     cout<<player.getLostBet()<<endl;
+                    player.PrintWallet();
+                }
+                else if (player.getHandVal()<21 && player.getHandVal()==Dealer.getHandVal()){
+                    cout<<"Push"<<endl;
+                    cout<<"Player Value:"<<endl;
+                    cout<< player.getHandVal()<<endl;
+                    cout<<"Dealer Value:"<<endl;
+                    cout<< Dealer.getHandVal()<<endl;
                     player.PrintWallet();
                 }
                 else if (player.getHandVal()==21){
@@ -524,14 +570,7 @@ int main(){
                     cout<<player.getbet()<<endl;
                     player.PrintWallet();
                 }
-                else if (player.getHandVal()<21 && player.getHandVal()==Dealer.getHandVal()){
-                    cout<<"Push"<<endl;
-                    cout<<"Player Value:"<<endl;
-                    cout<< player.getHandVal()<<endl;
-                    cout<<"Dealer Value:"<<endl;
-                    cout<< Dealer.getHandVal()<<endl;
-                    player.PrintWallet();
-                }
+               
                 else{
                     player.lose();
                     cout<<"lose :("<<endl;
@@ -545,6 +584,7 @@ int main(){
                 }
             }
         }
+        //A play again option. Only activates if the player has something to bet (the players wallet is above zero)
         if(player.getWallet()>0){
             cout<<"Play again? (Y)es (N)o"<<endl;
             cin>>B;
