@@ -59,6 +59,30 @@ iv.	Player value (value of hand)
 b.	All methods that are going to be needed to play the game.
 4.	A main program class (Main method)
 
+Lab 1:
+Dictionary
+
+
+Background
+
+Each student will write a Python program.  This program will manage a list of usernames in a computer system. The list of usernames will contain the username as the key field and the First and Last Name as the value field. The following is an example of what the key field will look like,
+
+“Smithb”:”Bob Smith”
+
+Specific features of the program
+
+The program will allow users to enter a First name and then a Last name.  This data will be placed into a list of username : name pairs.  The user name is constructed from the input.  For example, if the user enters
+
+Sue Jones
+
+The user name would be JonesS  For Thomas Re, 
+
+The username will be ret
+
+There needs to be a function that will sort the list of usernames alphabetically by the first letter of the username.  There will be no duplicates in this list.
+
+
+
 Lab 2:
 Fibonacci numbers
 
@@ -79,3 +103,37 @@ Please enter the size of the Fibonacci sequence: 8
 Sample 2:
 Please enter the size of the Fibonacci sequence: 1
 That is invalid, please try a number greater or equal to 2
+
+
+Lab 3:
+Sieve Prime Numbers
+
+
+Sieve Prime Number Algorithm
+
+Background
+Sieve of Eratosthenes is an algorithm that is used to find prime numbers within a set of ordered values.  The algorithm works off a list.  It starts off at the beginning and then starts to eliminate composite numbers, from that list.  The process is done by starting with the first number of the list, then dividing each of the preceding numbers, by that number.  Any number that produces a whole number, is determined not to be prime, and crossed out of the list.  Bellow is the example of this algorithm in Theory.
+1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20
+
+Starting with this list at 2, we divide each number after it to see which one is composite.  We then cross out the composite numbers and have the following list after.
+1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20
+
+From this, you can see that 4, 6, 8, 10, 12, 14, 16, 18, 20 are all composite numbers and have been crossed off the list.  Now divide the remaining number by the next non crossed out number.  In this case, this is going to be number 3.  By dividing all the remaining numbers by three and crossing out the composite number we now have the following.
+1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20
+
+From this, you can see the only numbers that remain in the list are 1,2,3,5,7,11,13,17, and 19.  Which are all of the prime numbers from 1 and 20.  So the following question remains.
+When should this algorithm stop?
+The answer is simple.  The stopping value or number in the list is a value that will be less than the square root of the largest number.  With this case the largest number within the list is 20.  The square root of 20 is close to 4.  So the last number to use in the list will be 3 and the algorithm can stop at 3.  As you can see, when we did this, only prime numbers remained.
+
+Project Specs
+You will do a computer program that will ask the user to enter the size of a list.   The size of the list will go from 1 to the size entered by the user.  Your program will implement the sieve algorithm to create a list of prime numbers from 1 to size of list.
+The size of the list cannot be less than 2.
+Each step of the list algorithm should be printed to the screen like the documentation.  No boxes or strike throughs are needed.  However, the composite numbers must be kept and shown that they have been eliminated.
+The loops used must stop when the square root of the max number has been reached.
+
+What I would like to see from you all first:
+1.	A well-planned approach to solving this problem.  Show or indicate to the instructor that you understand the algorithm and know what will be needed to solve this program or project.
+2.	The project broken into smaller pieces and indicate to the instructor which piece should be solved first.
+3.	Then write the code, test each piece, and get it working, BEFORE starting on the next piece of the project.
+4.	Combine the pieces and then get the function working completely.  Test the program with larger lists that the example and verify that you have the expected output.
+
