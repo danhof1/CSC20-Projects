@@ -4,24 +4,33 @@
 using namespace std;
 
 //1 1 2 3 5 8 13
-
-void fib(unsigned long int size){
-  int fzero =0;
-  int fone =1;
-  unsigned long int *list = new unsigned long int(size);
-  if(size<2){
-    cout<<"error the size is too small!!"<<endl;
+class fib{
+  public:
+  fib(){
+    
   }
-
-}
+  int alg(int n){
+    if(n<2){
+      return 1;
+    }
+    return alg(n-1)+alg(n-2);
+  }
+};
 int main(){
-
+    fib Fib;
     int listSize = 0;
-    int arr[];
-    cout << "Please enter a size of the list: "<<endl;
+    cout<<"How many fibbonacci numbers?"<<endl;
     cin>>listSize;
-    for(int x=0;x<length(arr);x++){
+    int arr[listSize];
+    
+    for(int x=0;x<sizeof(arr)/sizeof(arr[0]);x++){
+      arr[x]=Fib.alg(x);
 
     }
+    for(int x=0;x<(sizeof(arr)/sizeof(arr[0]))-1;x++){
+      cout<<arr[x]<<",";
+    }
+    cout << arr[listSize-1]<< endl << endl;
+    
         
 }
