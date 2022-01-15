@@ -25,7 +25,6 @@ int main(){
     
     for(int x=0;x<sizeof(arr)/sizeof(arr[0]);x++){
       arr[x]=Fib.alg(x);
-
     }
     for(int x=0;x<(sizeof(arr)/sizeof(arr[0]))-1;x++){
       cout<<arr[x]<<",";
