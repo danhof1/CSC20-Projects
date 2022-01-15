@@ -59,9 +59,7 @@ iv.	Player value (value of hand)
 b.	All methods that are going to be needed to play the game.
 4.	A main program class (Main method)
 
-Lab 2
-
-
+Lab 2:
 Fibonacci numbers
 
 
