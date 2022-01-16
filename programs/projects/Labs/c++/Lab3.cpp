@@ -4,34 +4,31 @@
 using namespace std;
 
 class Sieve{
-    private:
-        int size;
-        long int *list;
     public:
-    
     Sieve(){
         
     }
     void initialize(int n,bool arr[]){
-        for(int x=0;x<sizeof(arr)/sizeof(arr[0]);x++){
+        for(int x=0;x<n+1;x++){
             arr[x]=true;
         }
     }
     //3) 
-    void runAlgorithm(int size,bool arr[]){
-         if (size <= 2){
+    void runAlgorithm(int n,bool arr[]){
+         if (n <= 2){
              cout<<"error your list is too small"<<endl;
          }
          else
          {
-            for (int p = 2; p*p <= size; p++)
+            //Do in the range floor(sqrt(size))
+            for (int p = 2; p*p <= n; p++)
             {
-                // If prime[p] is not changed, then it is a prime
+                // If arr[p] is not changed, then it is a prime
                 if (arr[p] == true)
                     {
                         // Update all multiples of p
-                        for (int i = p*2; i <= size; i += p)
-                        arr[i] = false;
+                        for (int i = p*2; i <= n; i += p)
+                            arr[i] = false;
                     }
             }
 
@@ -41,18 +38,16 @@ class Sieve{
     }
     //2) create this function to print the list
     //for debugging purposes.
-    void printList(){
-        for(int i = 0; i < size; i++){
-            cout<< list[i] << ",";
+    void printList(int n){
+        for(int i = 1; i < n; i++){
+            cout<< i << ",";
         }
-        cout << list[size-1]<< endl << endl;
+        cout << n << endl << endl;
     }
     
-
-
     //print the prime numbers 
-    void printPrimes(bool arr[]){
-       for (int p = 2; p <= (sizeof(arr) /sizeof(arr[0])); p++){
+    void printPrimes(int n,bool arr[]){
+       for (int p = 2; p <= n; p++){
             if (arr[p])
                 cout << p << " ";
        }
@@ -76,5 +71,9 @@ int main(){
     bool* arr= new bool[listSize];
     sieve.initialize(listSize,arr);
     sieve.runAlgorithm(listSize,arr);
-    sieve.printPrimes(arr);
+    sieve.printList(listSize);
+    cout<<""<<endl;
+    sieve.printPrimes(listSize,arr);
+    cout<<""<<endl;
+    delete[] arr;
 };
