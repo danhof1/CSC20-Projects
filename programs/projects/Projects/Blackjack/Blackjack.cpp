@@ -346,7 +346,7 @@ int main(){
     Player Dealer = Player();
     Player player = Player();
     Deck myDeck =Deck();
-    int Ace=0;
+    string Ace="";
     cout<< "The program has started"<<endl;
     myDeck.initialize();
     myDeck.shuffle();
@@ -365,17 +365,17 @@ int main(){
         player.printHand();
         //if the players first card is an ace, then they can choose to set it to one or 11
         if(player.peekCard(0).getFace()=="Ace"){
-            cout<<"You got an ace, do you want it to be a 1 or 11?"<<endl;
+            cout<<"You got an ace, do you want it to be a (1) or (11)?"<<endl;
             cin>>Ace;
-            if (Ace==1){
+            if (Ace=="1"){
                 player.changeCardValue(0,1);
 
             }
         }
         if((player.peekCard(1).getFace()=="Ace")){
-            cout<<"You got an ace, do you want it to be a 1 or 11?"<<endl;
+            cout<<"You got an ace, do you want it to be a (1) or (11)?"<<endl;
             cin>>Ace;
-            if (Ace==1){
+            if (Ace=="1"){
                 player.changeCardValue(1,1);
             }
         }
@@ -424,9 +424,9 @@ int main(){
                     player.changeCardValue(2,1);
                 }
                 if((player.peekCard(2).getFace()=="Ace")&&player.getHandVal()<11){
-                    cout<<"You got an ace, do you want it to be a 1 or 11?"<<endl;
+                    cout<<"You got an ace, do you want it to be a (1) or (11)?"<<endl;
                     cin>>Ace;
-                    if (Ace==1){
+                    if (Ace=="1"){
                         player.changeCardValue(2,1);
                     }
                  }
