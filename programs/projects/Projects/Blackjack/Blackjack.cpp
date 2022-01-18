@@ -329,6 +329,10 @@ class Player{
         Card peekCard(int index){
             return Hand[index];
         }
+        void changeCardValue(int index, int value){
+            Hand[index].setVal(value);
+        }        
+        
        
         
 
@@ -366,14 +370,14 @@ int main(){
             cout<<"You got an ace, do you want it to be a 1 or 11?"<<endl;
             cin>>Ace;
             if (Ace==1){
-                player.peekCard(0).setVal(1);
+                player.changeCardValue(0,1);
             }
         }
         if((player.peekCard(1).getFace()=="Ace")){
             cout<<"You got an ace, do you want it to be a 1 or 11?"<<endl;
             cin>>Ace;
             if (Ace==1){
-                player.peekCard(1).setVal(1);
+                player.changeCardValue(1,1);
             }
         }
         //if you get a blackjack(you start with 21 and the dealer doesnt have 21)
@@ -418,13 +422,13 @@ int main(){
             if ((H=="H")||(H=="h")){
                 player.addCard(myDeck.getCard());
                 if((player.peekCard(2).getFace()=="Ace")&&player.getHandVal()>11){
-                    player.peekCard(2).setVal(1);
+                    player.changeCardValue(2,1);
                 }
                 if((player.peekCard(2).getFace()=="Ace")&&player.getHandVal()<11){
                     cout<<"You got an ace, do you want it to be a 1 or 11?"<<endl;
                     cin>>Ace;
                     if (Ace==1){
-                        player.peekCard(1).setVal(1);
+                        player.changeCardValue(1,1);
                     }
                  }
                 cout<<"Dealer Hand:"<<endl;
