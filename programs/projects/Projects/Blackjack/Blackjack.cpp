@@ -285,9 +285,6 @@ class Player{
         int getHandVal(){
             return HandVal;
         }
-        void ace(){
-            HandVal+=1;
-        }
         Card getHand(){
             return Hand[10];
         }
@@ -331,6 +328,7 @@ class Player{
         }
         void changeCardValue(int index, int value){
             Hand[index].setVal(value);
+            HandVal-=10;
         }        
         
        
@@ -371,6 +369,7 @@ int main(){
             cin>>Ace;
             if (Ace==1){
                 player.changeCardValue(0,1);
+
             }
         }
         if((player.peekCard(1).getFace()=="Ace")){
@@ -428,7 +427,7 @@ int main(){
                     cout<<"You got an ace, do you want it to be a 1 or 11?"<<endl;
                     cin>>Ace;
                     if (Ace==1){
-                        player.changeCardValue(1,1);
+                        player.changeCardValue(2,1);
                     }
                  }
                 cout<<"Dealer Hand:"<<endl;
